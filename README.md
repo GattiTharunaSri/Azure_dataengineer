@@ -47,55 +47,13 @@ SCHEMA_REGISTRY_API_SECRET=your_sr_secret
 
 4. Run the Pipeline:
 Start the Producers: python producers/transaction_producer.py
-
 Execute Flink Logic: Copy /flink/fraud_detection_logic.sql into my Confluent Flink Workspace.
-
 Start the Consumer: python consumers/alert_consumer.py
-Gemini said
-To get the job, your repository must look like it belongs to an engineer who cares about reproducibility and documentation. Here is exactly what to include in those two files.
-
-1. requirements.txt
-This file allows recruiters to install all dependencies with one command (pip install -r requirements.txt). Create a file named requirements.txt in your root directory and paste this:
-
-Plaintext
-confluent-kafka==2.3.0
-fastavro==1.9.4
-faker==22.6.0
-python-dotenv==1.0.1
-2. README.md
-Your README is your sales pitch. Copy this template and fill in the bracketed information.
-
-SentinelStream: Real-Time Fraud Detection Pipeline
-🛡️ Project Overview
-SentinelStream is a FAANG-grade streaming architecture designed to detect "Impossible Travel" fraud patterns in real-time. By processing credit card transactions with sub-second latency, the system identifies fraudulent activity (e.g., a user swiping in New York and then Paris 10 minutes later) and triggers automated security responses.
-
-🏗️ System Architecture
-The pipeline is built on Confluent Cloud (Azure) and utilizes:
-
-Producers: Python scripts simulating high-velocity transaction streams and user profile data.
-
-Schema Registry: Enforces Avro data contracts to ensure data integrity across the pipeline.
-
-Apache Flink: Performs stateful stream processing, joining live transactions with user profiles and analyzing temporal-spatial patterns.
-
-Consumers: A downstream "Action Layer" that consumes alerts and simulates automated card suspension.
-
-🚀 Key Technical Features
-1. Stateful Stream Processing
-Unlike traditional batch processing, this system uses Flink SQL to maintain a 10-minute sliding window. This allows the engine to compare a user's current transaction coordinates against their previous transaction's state to calculate travel velocity.
-
-2. Data Governance with Avro
-To prevent "Data Swamp" issues, I implemented Shift-Left Security using the Confluent Schema Registry. All topics are governed by Avro schemas, ensuring that any malformed data is rejected at the broker level before it can impact downstream analytics.
-
-3. Stream-Table Joining
-The system enriches raw transaction streams by joining them with a compacted user_profiles topic. This allows for real-time validation against a user's "Home Country" and "Daily Spending Limit."
 
 🛠️ Setup & Installation
 Prerequisites:
-
 Python 3.9+
-
-A Confluent Cloud Account (Azure EastUS cluster recommended)
+A Confluent Cloud Account
 
 1. Clone the repository:
 
